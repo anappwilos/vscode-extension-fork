@@ -1,54 +1,73 @@
-import type { ExtensionContext } from 'vscode'
-import { exec } from 'node:child_process'
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
+import type { ExtensionContext, Uri, WorkspaceFolder } from 'vscode'
+import { execFile } from 'node:child_process'
+import { access } from 'node:fs/promises'
+import { join } from 'node:path'
+import process from 'node:process'
 import { commands, window, workspace } from 'vscode'
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
-export async function activate(context: ExtensionContext) {
-  // Use the console to output diagnostic information (console.log) and errors (console.error)
-  // This line of code will only be executed once when your extension is activated
-  // eslint-disable-next-line no-console
-  console.log('Congratulations, your extension "fork" is now active!')
+function getActiveWorkspaceFolder(): WorkspaceFolder | undefined {
+  const activeEditor = window.activeTextEditor
+  if (activeEditor) {
+    return workspace.getWorkspaceFolder(activeEditor.document.uri)
+  }
 
-  // The command has been defined in the package.json file
-  // Now provide the implementation of the command with registerCommand
-  // The commandId parameter must match the command field in package.json
-  const disposable = commands.registerCommand('fork.open', () => {
-    // The code you place here will be executed every time your command is executed
+  return workspace.workspaceFolders?.[0]
+}
 
-    // https://stackoverflow.com/questions/39569993/vs-code-extension-get-full-path
-    let rootPath: string = ''
-    const activeEditor = window.activeTextEditor
+async function hasGitDirectory(workspaceUri: Uri): Promise<boolean> {
+  const gitDir = join(workspaceUri.fsPath, '.git')
+  try {
+    await access(gitDir)
+    return true
+  }
+  catch {
+    return false
+  }
+}
 
-    if (activeEditor) {
-      // Get the workspace folder for the currently active file
-      const workspaceFolder = workspace.getWorkspaceFolder(activeEditor.document.uri)
-      if (workspaceFolder) {
-        rootPath = workspaceFolder.uri.path
-      }
-      else {
-        window.showErrorMessage('Fork error: Active file is not in a workspace folder')
-        return
-      }
-    }
-    else if (workspace.workspaceFolders !== undefined) {
-      rootPath = workspace.workspaceFolders[0].uri.path
-    }
-    else {
-      window.showErrorMessage('Fork error: Working folder not found, open a folder an try again')
+function openRepoInFork(workspaceUri: Uri): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (process.platform !== 'darwin') {
+      reject(new Error('Fork extension currently supports macOS only.'))
       return
     }
-    exec(`open -a fork ${rootPath}`, (err: any, _stdout: any, _stderr: any) => {
-      if (err) {
-        window.showErrorMessage(`Fork error: ${err}`)
+
+    execFile('open', ['-a', 'Fork', workspaceUri.fsPath], (error) => {
+      if (error) {
+        reject(error)
+        return
       }
+
+      resolve()
     })
+  })
+}
+
+export async function activate(context: ExtensionContext) {
+  const disposable = commands.registerCommand('fork.open', async () => {
+    const workspaceFolder = getActiveWorkspaceFolder()
+
+    if (!workspaceFolder) {
+      window.showErrorMessage('Fork error: no workspace folder found. Open a folder and try again.')
+      return
+    }
+
+    const isGitRepo = await hasGitDirectory(workspaceFolder.uri)
+    if (!isGitRepo) {
+      window.showErrorMessage('Fork error: selected folder is not a Git repository.')
+      return
+    }
+
+    try {
+      await openRepoInFork(workspaceFolder.uri)
+    }
+    catch (error) {
+      const message = error instanceof Error ? error.message : String(error)
+      window.showErrorMessage(`Fork error: ${message}`)
+    }
   })
 
   context.subscriptions.push(disposable)
 }
 
-// this method is called when your extension is deactivated
-export async function deactivate() {}
+export function deactivate() {}

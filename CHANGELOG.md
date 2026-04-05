@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.2.1
+
+- Improved command robustness in `src/index.ts`.
+- Added explicit Git repository validation before opening Fork.
+- Switched process launch to `execFile` for safer command execution.
+- Added clear platform handling and error messages.
+
 ## 0.2.0
 
 - 2026 maintenance update.
