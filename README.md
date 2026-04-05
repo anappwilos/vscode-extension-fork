@@ -1,17 +1,35 @@
-# Fork
+# Fork (VS Code Extension)
 
-This extension provide a simple way to use fork app.
+A lightweight extension to open your current workspace repository directly in the [Fork](https://fork.dev/) desktop app.
 
 ## Features
 
-- quick open current workspace in fork app.
+- Adds the command `Fork: open current git repository in Fork`.
+- Detects the active file workspace folder first.
+- Falls back to the first workspace folder when no editor is active.
 
-## Release Notes
+## 2026 refresh
 
-Users appreciate release notes as you update your extension.
+This repository has been updated for modern VS Code extension development:
 
-### For more information
+- Manifest compatibility updated to current VS Code API ranges.
+- Metadata and command text polished for marketplace clarity.
+- Project docs refreshed to match the real source layout (`src/index.ts`).
 
-* [Github](https://github.com/imyangyong/vscode-extension-fork/issues)
+## Usage
 
-**Enjoy it!**
+1. Open a project folder in VS Code.
+2. Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`).
+3. Run `Fork: open current git repository in Fork`.
+
+## Development
+
+```bash
+pnpm install
+pnpm build
+pnpm lint
+```
+
+## Links
+
+- Issues: https://github.com/imyangyong/vscode-extension-fork/issues
