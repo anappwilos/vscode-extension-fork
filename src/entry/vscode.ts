@@ -1,6 +1,6 @@
 import process from 'node:process'
-import type { ExtensionContext, LogOutputChannel } from 'vscode'
-import { commands, window, workspace } from 'vscode'
+import type { ExtensionContext, LogOutputChannel, StatusBarItem } from 'vscode'
+import { commands, StatusBarAlignment, window, workspace } from 'vscode'
 import { selectWorkspaceRoot } from '../business/selectWorkspaceRoot'
 import { createAppConfig } from '../config/appConfig'
 import { openRepositoryInFork } from '../services/forkLaunchService'
@@ -25,12 +25,27 @@ function getCurrentWorkspaceSelection(): string | undefined {
   })
 }
 
+function createForkStatusBarItem(): StatusBarItem {
+  const item = window.createStatusBarItem(StatusBarAlignment.Left, 100)
+  item.name = 'Fork Open Repository'
+  item.text = '$(source-control) Fork'
+  item.tooltip = 'Open current repository in Fork'
+  item.command = 'fork.open'
+  item.show()
+
+  return item
+}
+
 export async function activate(context: ExtensionContext): Promise<void> {
   const logChannel: LogOutputChannel = window.createOutputChannel('Fork', { log: true })
   const log = createLogger(logChannel)
 
   context.subscriptions.push(logChannel)
   log.info('Fork extension activated')
+
+  const statusBarItem = createForkStatusBarItem()
+  context.subscriptions.push(statusBarItem)
+  log.info('Fork status bar action is visible')
 
   const disposable = commands.registerCommand('fork.open', async () => {
     log.info('fork.open command triggered')

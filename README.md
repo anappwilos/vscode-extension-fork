@@ -41,6 +41,11 @@ La ruta de Fork se configura desde VS Code:
 
 - setting: `fork.executablePath`
 
+## UI
+
+- Se muestra un ícono/botón `$(source-control) Fork` en la barra inferior de VS Code.
+- Al hacer clic, ejecuta el comando `fork.open`.
+
 ## Logging
 
 La extensión escribe logs con `log.info` / `log.error` en el canal de salida **Fork**.

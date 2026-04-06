@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.3.5
+
+- Se agrega ícono/botón en la barra inferior de VS Code para ejecutar `fork.open`.
+- El botón usa `$(source-control) Fork` con tooltip y comando directo.
+
 ## 0.3.4
 
 - Se fuerza soporte operativo únicamente para Windows (mensaje explícito en otros sistemas).
