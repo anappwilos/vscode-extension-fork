@@ -20,6 +20,11 @@ La ruta de Fork se configura desde VS Code:
 
 - setting: `fork.executablePath`
 
+
+## Logging
+
+La extensión escribe logs con `log.info` / `log.error` en el canal de salida **Fork**.
+
 ## Scripts principales
 
 ```bash

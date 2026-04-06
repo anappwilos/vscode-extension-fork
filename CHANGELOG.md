@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.3.3
+
+- Agregado logger con `log.info` / `log.error` usando `LogOutputChannel` de VS Code.
+- El comando `fork.open` ahora muestra y registra eventos/errores en el canal **Fork**.
+
 ## 0.3.2
 
 - Reutilizado el `launch.json` solicitado con todos los perfiles VSCODE/ANGRAVITY y perfiles de test.
