@@ -52,6 +52,7 @@ La búsqueda de ubicación de Fork no se ejecuta en cada comando: usa caché y s
 
 ## UI
 
+- La extensión se activa automáticamente al iniciar VS Code (`onStartupFinished`), sin tener que ejecutar primero el comando.
 - Se muestra un ícono/botón `Fork` en la barra inferior de VS Code (lado derecho).
 - También se agrega acción con ícono en `SCM title` y `editor title` para acceso rápido.
 - Al hacer clic, ejecuta el comando `fork.open`.

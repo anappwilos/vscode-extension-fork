@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.3.10
+
+- Activación automática con `onStartupFinished` para que el acceso rápido se vea sin ejecutar primero el comando.
+
 ## 0.3.9
 
 - Optimización de activación/comando: resolución de `Fork.exe` con caché (`globalState`) y re-búsqueda solo en primera ejecución o cuando la ruta desaparece.

@@ -2,7 +2,7 @@
   "publisher": "imyangyong",
   "name": "fork",
   "displayName": "Fork",
-  "version": "0.3.9",
+  "version": "0.3.10",
   "packageManager": "npm@11.4.2",
   "description": "Open the current workspace repository in the Fork desktop app.",
   "repository": {
@@ -19,6 +19,7 @@
     "node": ">=20"
   },
   "activationEvents": [
+    "onStartupFinished",
     "onCommand:fork.open"
   ],
   "contributes": {
