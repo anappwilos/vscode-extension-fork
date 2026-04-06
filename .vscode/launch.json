@@ -2,17 +2,195 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Run Fork Extension",
+      "name": "🚀 VSCODE - Launch Extension",
       "type": "extensionHost",
       "request": "launch",
       "runtimeExecutable": "${execPath}",
       "args": [
-        "--extensionDevelopmentPath=${workspaceFolder}"
+        "--profile-temp",
+        "--disable-extensions",
+        "--extensionDevelopmentPath=${workspaceFolder}",
+        "C:\\Users\\Developer\\Desktop\\Trash"
       ],
       "outFiles": [
-        "${workspaceFolder}/dist/**/*.js"
+        "${workspaceFolder}/out/**/*.js"
       ],
-      "preLaunchTask": "build"
+      "sourceMaps": true,
+      "preLaunchTask": "watch"
+    },
+    {
+      "name": "🐞 VSCODE - Debug Extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "runtimeExecutable": "${execPath}",
+      "args": [
+        "--profile-temp",
+        "--disable-extensions",
+        "--extensionDevelopmentPath=${workspaceFolder}",
+        "C:\\Users\\Developer\\Desktop\\Trash"
+      ],
+      "preLaunchTask": "watch",
+      "outFiles": [
+        "${workspaceFolder}/out/**/*.js"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "!**/node_modules/**"
+      ],
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
+    },
+    {
+      "name": "🚀 ANGRAVITY - Launch Extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "runtimeExecutable": "${execPath}",
+      "args": [
+        "--disable-extensions",
+        "--extensionDevelopmentPath=${workspaceFolder}",
+        "${workspaceFolder}/.vscode-test/Adios"
+      ],
+      "outFiles": [
+        "${workspaceFolder}/out/**/*.js"
+      ],
+      "sourceMaps": true,
+      "preLaunchTask": "watch"
+    },
+    {
+      "name": "🐞 ANGRAVITY - Debug Extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "runtimeExecutable": "${execPath}",
+      "args": [
+        "--disable-extensions",
+        "--extensionDevelopmentPath=${workspaceFolder}",
+        "${workspaceFolder}/.vscode-test/Adios"
+      ],
+      "preLaunchTask": "watch",
+      "outFiles": [
+        "${workspaceFolder}/out/**/*.js"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "!**/node_modules/**"
+      ],
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
+    },
+    {
+      "name": "🚀 VSCODE - MR_1M - Launch Extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "runtimeExecutable": "${execPath}",
+      "args": [
+        "--profile-temp",
+        "--disable-extensions",
+        "--extensionDevelopmentPath=${workspaceFolder}",
+        "${workspaceFolder}/.vscode/MR_1M.code-workspace"
+      ],
+      "outFiles": [
+        "${workspaceFolder}/out/**/*.js"
+      ],
+      "sourceMaps": true,
+      "preLaunchTask": "watch"
+    },
+    {
+      "name": "🐞 VSCODE - MR_1M - Debug Extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "runtimeExecutable": "${execPath}",
+      "args": [
+        "--profile-temp",
+        "--disable-extensions",
+        "--extensionDevelopmentPath=${workspaceFolder}",
+        "${workspaceFolder}/.vscode/MR_1M.code-workspace"
+      ],
+      "preLaunchTask": "watch",
+      "outFiles": [
+        "${workspaceFolder}/out/**/*.js"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "!**/node_modules/**"
+      ],
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
+    },
+    {
+      "name": "🚀 ANGRAVITY - MR_1M - Launch Extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "runtimeExecutable": "${execPath}",
+      "args": [
+        "--disable-extensions",
+        "--extensionDevelopmentPath=${workspaceFolder}",
+        "${workspaceFolder}/.vscode/MR_1M.code-workspace"
+      ],
+      "outFiles": [
+        "${workspaceFolder}/out/**/*.js"
+      ],
+      "sourceMaps": true,
+      "preLaunchTask": "watch"
+    },
+    {
+      "name": "🐞 ANGRAVITY - MR_1M - Debug Extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "runtimeExecutable": "${execPath}",
+      "args": [
+        "--disable-extensions",
+        "--extensionDevelopmentPath=${workspaceFolder}",
+        "${workspaceFolder}/.vscode/MR_1M.code-workspace"
+      ],
+      "preLaunchTask": "watch",
+      "outFiles": [
+        "${workspaceFolder}/out/**/*.js"
+      ],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "!**/node_modules/**"
+      ],
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
+    },
+    {
+      "name": "Launch Tests",
+      "type": "extensionHost",
+      "request": "launch",
+      "runtimeExecutable": "${execPath}",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceRoot}",
+        "--extensionTestsPath=${workspaceRoot}/out/test"
+      ],
+      "stopOnEntry": false,
+      "sourceMaps": true,
+      "outDir": "${workspaceRoot}/out/test",
+      "preLaunchTask": "npm"
+    },
+    {
+      "name": "Debug Current Test File",
+      "type": "extensionHost",
+      "request": "launch",
+      "runtimeExecutable": "${execPath}",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceRoot}",
+        "--extensionTestsPath=${workspaceRoot}/out/test/suite/index"
+      ],
+      "env": {
+        "ANGITIGNORED_TEST_PATTERN": "${fileBasenameNoExtension}.js"
+      },
+      "stopOnEntry": false,
+      "sourceMaps": true,
+      "outDir": "${workspaceRoot}/out/test/suite",
+      "preLaunchTask": "npm"
     }
   ]
 }
