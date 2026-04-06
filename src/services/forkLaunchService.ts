@@ -18,10 +18,13 @@ export async function resolveWindowsForkExecutable(configuredPath: string): Prom
 
   const candidates = [
     configuredPath,
+    process.env.LOCALAPPDATA ? join(process.env.LOCALAPPDATA, 'Fork', 'current', 'fork.exe') : '',
     process.env.LOCALAPPDATA ? join(process.env.LOCALAPPDATA, 'Fork', 'Fork.exe') : '',
     process.env['ProgramFiles'] ? join(process.env['ProgramFiles'], 'Fork', 'Fork.exe') : '',
     process.env['ProgramFiles(x86)'] ? join(process.env['ProgramFiles(x86)'], 'Fork', 'Fork.exe') : '',
+    userProfile ? join(userProfile, 'AppData', 'Local', 'Fork', 'current', 'fork.exe') : '',
     userProfile ? join(userProfile, 'AppData', 'Local', 'Fork', 'Fork.exe') : '',
+    'C:\\Users\\Developer\\AppData\\Local\\Fork\\current\\fork.exe',
     'C:\\Program Files\\Fork\\Fork.exe',
     'C:\\Program Files (x86)\\Fork\\Fork.exe',
   ].filter(Boolean)
@@ -35,37 +38,23 @@ export async function resolveWindowsForkExecutable(configuredPath: string): Prom
   return ''
 }
 
-async function openRepositoryPath(
-  run: ExecFileRunner,
-  repositoryPath: string,
-  fallbackExecutable: string,
-): Promise<void> {
-  try {
-    await run('fork', [repositoryPath])
-    return
-  }
-  catch {
-    if (fallbackExecutable) {
-      await run(fallbackExecutable, [repositoryPath])
-      return
-    }
-    throw new Error('No se encontró Fork en Windows. Configura "fork.executablePath" con la ruta a Fork.exe.')
-  }
-}
-
 export async function openRepositoryInFork(context: LaunchContext, run: ExecFileRunner): Promise<void> {
   if (context.platform !== 'win32') {
     throw new Error('Fork extension: por el momento solo es viable en Windows.')
   }
 
-  if (context.forceNewWindow) {
-    if (context.executablePath) {
-      await run(context.executablePath, [])
-    }
-    else {
-      await run('fork', [])
-    }
+  const executable = context.executablePath || (await resolveWindowsForkExecutable(''))
+  if (!executable) {
+    throw new Error('No se encontró Fork en Windows. Configura "fork.executablePath" con la ruta a Fork.exe.')
   }
 
-  await openRepositoryPath(run, context.repositoryPath, context.executablePath)
+  if (context.forceNewWindow) {
+    // Similar to:
+    // C:\...\fork.exe && start "" "C:\...\fork.exe" "C:\...\repo"
+    await run(executable, [])
+    await run('cmd', ['/c', 'start', '', executable, context.repositoryPath])
+    return
+  }
+
+  await run(executable, [context.repositoryPath])
 }

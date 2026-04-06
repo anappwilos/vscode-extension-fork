@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.3.11
+
+- Implementación de apertura estilo Windows solicitada: `fork.exe` y luego `cmd /c start "" "fork.exe" "<repo>"`.
+- Resolución de ejecutable actualizada para incluir ruta `AppData\Local\Fork\current\fork.exe`.
+
 ## 0.3.10
 
 - Activación automática con `onStartupFinished` para que el acceso rápido se vea sin ejecutar primero el comando.

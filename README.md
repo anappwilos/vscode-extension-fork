@@ -25,8 +25,8 @@ Si no encuentra ejecutable, mostrará error y pedirá configurar `fork.executabl
 
 Cuando `fork.forceNewWindow=true`, la extensión ejecuta dos acciones en secuencia:
 
-1. Abrir una nueva ventana de Fork.
-2. Abrir el repositorio objetivo en Fork pasando la ruta.
+1. Abrir una nueva ventana de Fork (`fork.exe`).
+2. Ejecutar `cmd /c start "" "fork.exe" "<ruta-repo>"` para abrir el repo en esa nueva instancia.
 
 ## Arquitectura
 
