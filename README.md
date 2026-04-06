@@ -53,9 +53,9 @@ This repository has been updated for modern VS Code extension development:
 ## Development
 
 ```bash
-pnpm install
-pnpm build
-pnpm lint
+npm install
+npm run build
+npm run lint
 ```
 
 ## Links

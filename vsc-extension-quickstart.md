@@ -13,21 +13,21 @@
 ## Run in development
 
 1. Install dependencies:
-   - `pnpm install`
+   - `npm install`
 2. Build once:
-   - `pnpm build`
+   - `npm run build`
 3. Start watch mode while editing:
-   - `pnpm dev`
+   - `npm run dev`
 4. Press `F5` in VS Code to launch an Extension Development Host.
 
 ## Quality checks
 
 - Lint source files:
-  - `pnpm lint`
+  - `npm run lint`
 
 ## Package and publish
 
 - Create a VSIX package:
-  - `pnpm pack`
+  - `npm run pack`
 - Publish to marketplace:
-  - `pnpm publish`
+  - `npm run publish`

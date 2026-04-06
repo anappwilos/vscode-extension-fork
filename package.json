@@ -2,8 +2,8 @@
   "publisher": "imyangyong",
   "name": "fork",
   "displayName": "Fork",
-  "version": "0.2.2",
-  "packageManager": "pnpm@10.10.0",
+  "version": "0.2.3",
+  "packageManager": "npm@11.4.2",
   "description": "Open the current workspace repository in the Fork desktop app.",
   "repository": {
     "type": "git",
@@ -40,7 +40,7 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "pnpm run build",
+    "vscode:prepublish": "npm run build",
     "build": "NODE_ENV=production tsup",
     "dev": "NODE_ENV=development tsup --watch",
     "lint": "eslint src --ext ts",

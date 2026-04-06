@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.2.3
+
+- Migrated project package management from pnpm to npm.
+- Updated `packageManager` to `npm@11.4.2`.
+- Updated publish script hook to use `npm run build`.
+- Replaced pnpm commands in documentation with npm equivalents.
+
 ## 0.2.2
 
 - Added `fork.executablePath` setting in extension configuration.
