@@ -30,10 +30,10 @@ function getCurrentWorkspaceSelection(): string | undefined {
 }
 
 function createForkStatusBarItem(): StatusBarItem {
-  const item = window.createStatusBarItem(StatusBarAlignment.Left, 100)
+  const item = window.createStatusBarItem(StatusBarAlignment.Right, 1000)
   item.name = 'Fork Open Repository'
   item.text = '$(source-control) Fork'
-  item.tooltip = 'Open current repository in Fork'
+  item.tooltip = 'Fork: Open current repository'
   item.command = 'fork.open'
   item.show()
 

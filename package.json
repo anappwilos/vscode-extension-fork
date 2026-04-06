@@ -2,7 +2,7 @@
   "publisher": "imyangyong",
   "name": "fork",
   "displayName": "Fork",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "packageManager": "npm@11.4.2",
   "description": "Open the current workspace repository in the Fork desktop app.",
   "repository": {
@@ -25,7 +25,11 @@
     "commands": [
       {
         "command": "fork.open",
-        "title": "Fork: open current git repository in Fork"
+        "title": "Fork: open current git repository in Fork",
+        "icon": {
+          "light": "res/fork-icon-light.svg",
+          "dark": "res/fork-icon-dark.svg"
+        }
       }
     ],
     "configuration": {
@@ -44,6 +48,20 @@
           "scope": "application"
         }
       }
+    },
+    "menus": {
+      "scm/title": [
+        {
+          "command": "fork.open",
+          "group": "navigation@9"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "fork.open",
+          "group": "navigation@9"
+        }
+      ]
     }
   },
   "scripts": {

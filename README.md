@@ -44,7 +44,8 @@ La ruta de Fork se configura desde VS Code:
 
 ## UI
 
-- Se muestra un ícono/botón `$(source-control) Fork` en la barra inferior de VS Code.
+- Se muestra un ícono/botón `Fork` en la barra inferior de VS Code (lado derecho).
+- También se agrega acción con ícono en `SCM title` y `editor title` para acceso rápido.
 - Al hacer clic, ejecuta el comando `fork.open`.
 
 ## Logging

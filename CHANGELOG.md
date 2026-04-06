@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.3.7
+
+- Ajuste de visibilidad del acceso rápido: status bar item movido al lado derecho con mayor prioridad.
+- Agregado comando `fork.open` con ícono en `SCM title` y `editor title` para acceso rápido visible.
+- Nuevos íconos light/dark para el comando (`res/fork-icon-light.svg`, `res/fork-icon-dark.svg`).
+
 ## 0.3.6
 
 - Se agrega setting `fork.forceNewWindow` (default `true`).
