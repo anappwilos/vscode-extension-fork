@@ -6,22 +6,19 @@ Extensión de VS Code para abrir el repositorio Git actual directamente en la ap
 
 Estructura modular y mantenible:
 
-- `src/entry`: puntos de entrada (`vscode` y `start`)
+- `src/entry`: entrada de la extensión (`vscode`)
 - `src/business`: lógica de negocio pura
 - `src/services`: integración con sistema de archivos y ejecución de procesos
-- `src/config`: configuración y variables de entorno
+- `src/config`: configuración
 - `src/utils`: utilidades compartidas
 - `src/types`: tipos e interfaces
 - `tests`: unit tests y smoke tests
 
 ## Configuración
 
-Puedes configurar la ruta de Fork por dos vías:
+La ruta de Fork se configura desde VS Code:
 
-1. Setting de VS Code: `fork.executablePath`
-2. Variable de entorno: `FORK_EXECUTABLE_PATH`
-
-Prioridad: setting de VS Code > variable de entorno.
+- setting: `fork.executablePath`
 
 ## Scripts principales
 

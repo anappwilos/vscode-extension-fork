@@ -2,7 +2,7 @@
   "publisher": "imyangyong",
   "name": "fork",
   "displayName": "Fork",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "packageManager": "npm@11.4.2",
   "description": "Open the current workspace repository in the Fork desktop app.",
   "repository": {
@@ -42,10 +42,10 @@
   },
   "scripts": {
     "clean": "rm -rf dist .test-dist",
-    "dev": "esbuild src/index.ts --bundle --platform=node --format=cjs --target=node20 --outfile=dist/index.js --sourcemap --watch",
+    "dev": "esbuild src/index.ts --bundle --platform=node --format=cjs --target=node20 --external:vscode --outfile=dist/index.js --sourcemap --watch",
     "prebuild": "npm run lint && npm run typecheck && npm run test",
-    "build": "npm run clean && esbuild src/index.ts --bundle --platform=node --format=cjs --target=node20 --outfile=dist/index.js --sourcemap && esbuild src/entry/start.ts --bundle --platform=node --format=cjs --target=node20 --outfile=dist/start.js --sourcemap",
-    "start": "node dist/start.js",
+    "build": "npm run clean && esbuild src/index.ts --bundle --platform=node --format=cjs --target=node20 --external:vscode --outfile=dist/index.js --sourcemap",
+    "start": "node -e \"console.log('Use VS Code Extension Host (F5) to run the extension.')\"",
     "lint": "eslint .",
     "format": "prettier --check .",
     "format:write": "prettier --write .",

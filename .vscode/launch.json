@@ -13,16 +13,6 @@
         "${workspaceFolder}/dist/**/*.js"
       ],
       "preLaunchTask": "npm: build"
-    },
-    {
-      "name": "Run Runtime Start",
-      "type": "node",
-      "request": "launch",
-      "program": "${workspaceFolder}/dist/start.js",
-      "preLaunchTask": "npm: build",
-      "skipFiles": [
-        "<node_internals>/**"
-      ]
     }
   ]
 }

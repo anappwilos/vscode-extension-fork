@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.3.1
+
+- Eliminado soporte por variable de entorno para mantener configuración solo en VS Code (`fork.executablePath`).
+- Eliminado runtime entry no necesario (`src/entry/start.ts`) para enfocar el proyecto únicamente como extensión.
+- Corregido build con esbuild añadiendo `--external:vscode` para evitar el error `Could not resolve "vscode"`.
+
 ## 0.3.0
 
 - Refactor técnico completo a arquitectura modular por capas (`entry`, `business`, `services`, `config`, `utils`, `types`).
