@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.2.5
+
+- Replaced deprecated `vsce` package with `@vscode/vsce`.
+- Removed unused `pnpm` dev dependency after npm migration.
+- Bumped extension version for dependency maintenance.
+
 ## 0.2.4
 
 - Added `.vscode/launch.json` with launch profiles for:

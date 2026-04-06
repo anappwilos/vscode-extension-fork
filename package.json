@@ -2,7 +2,7 @@
   "publisher": "imyangyong",
   "name": "fork",
   "displayName": "Fork",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "packageManager": "npm@11.4.2",
   "description": "Open the current workspace repository in the Fork desktop app.",
   "repository": {
@@ -53,10 +53,9 @@
     "@antfu/eslint-config": "^4.13.0",
     "@types/node": "^22.15.12",
     "@types/vscode": "^1.99.0",
+    "@vscode/vsce": "^3.6.2",
     "eslint": "^9.26.0",
-    "pnpm": "^10.10.0",
     "tsup": "^8.4.0",
-    "typescript": "^5.8.3",
-    "vsce": "^2.10.0"
+    "typescript": "^5.8.3"
   }
 }
