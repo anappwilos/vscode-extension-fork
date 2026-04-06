@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.3.2
+
+- Reutilizado el `launch.json` solicitado con todos los perfiles VSCODE/ANGRAVITY y perfiles de test.
+- Añadidas tareas VS Code (`watch`, `npm`) para soportar `preLaunchTask` definidos en los perfiles.
+
 ## 0.3.1
 
 - Eliminado soporte por variable de entorno para mantener configuración solo en VS Code (`fork.executablePath`).
