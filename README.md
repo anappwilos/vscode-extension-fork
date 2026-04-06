@@ -2,6 +2,27 @@
 
 Extensión de VS Code para abrir el repositorio Git actual directamente en la app de escritorio **Fork**.
 
+## Estado actual de plataforma (2026)
+
+> **Por ahora esta extensión se considera viable solo en Windows.**
+
+Investigación de referencia:
+
+- Fork se presenta como app para Mac y Windows en su sitio oficial: https://fork.dev/releasenotes
+- Existe distribución en Windows vía winget (`Fork.Fork`): https://winget.run/pkg/Fork/Fork
+
+## Cómo encuentra Fork en Windows
+
+Orden de resolución:
+
+1. `fork.executablePath` (si lo defines en VS Code)
+2. `%LOCALAPPDATA%\Fork\Fork.exe`
+3. `%ProgramFiles%\Fork\Fork.exe`
+4. `%ProgramFiles(x86)%\Fork\Fork.exe`
+5. comando `fork` en `PATH`
+
+Si no encuentra ejecutable, mostrará error y pedirá configurar `fork.executablePath`.
+
 ## Arquitectura
 
 Estructura modular y mantenible:
@@ -19,7 +40,6 @@ Estructura modular y mantenible:
 La ruta de Fork se configura desde VS Code:
 
 - setting: `fork.executablePath`
-
 
 ## Logging
 

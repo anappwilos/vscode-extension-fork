@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.3.4
+
+- Se fuerza soporte operativo únicamente para Windows (mensaje explícito en otros sistemas).
+- Se añade búsqueda automática de `Fork.exe` en rutas comunes de Windows y fallback al comando `fork` en PATH.
+- README actualizado con estado de viabilidad actual (Windows) y estrategia de detección.
+
 ## 0.3.3
 
 - Agregado logger con `log.info` / `log.error` usando `LogOutputChannel` de VS Code.
