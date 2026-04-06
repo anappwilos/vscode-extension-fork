@@ -18,12 +18,17 @@
    - `npm run build`
 3. Start watch mode while editing:
    - `npm run dev`
-4. Press `F5` in VS Code to launch an Extension Development Host.
+4. Launch profiles in VS Code (`.vscode/launch.json`):
+   - `Run Fork Extension (VS Code)`
+   - `Run Antigravity Playground`
+   - `Run VS Code + Antigravity` (compound)
 
 ## Quality checks
 
 - Lint source files:
   - `npm run lint`
+- Run Antigravity helper process:
+  - `npm run antigravity`
 
 ## Package and publish
 

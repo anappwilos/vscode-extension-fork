@@ -2,7 +2,7 @@
   "publisher": "imyangyong",
   "name": "fork",
   "displayName": "Fork",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "packageManager": "npm@11.4.2",
   "description": "Open the current workspace repository in the Fork desktop app.",
   "repository": {
@@ -46,7 +46,8 @@
     "lint": "eslint src --ext ts",
     "lint:fix": "eslint --fix src --ext ts",
     "publish": "vsce publish --no-dependencies",
-    "pack": "vsce package --no-dependencies"
+    "pack": "vsce package --no-dependencies",
+    "antigravity": "node playground/index.js"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.13.0",

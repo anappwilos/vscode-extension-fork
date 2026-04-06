@@ -1,5 +1,14 @@
 # Change Log
 
+## 0.2.4
+
+- Added `.vscode/launch.json` with launch profiles for:
+  - `Run Fork Extension (VS Code)`
+  - `Run Antigravity Playground`
+  - `Run VS Code + Antigravity` (compound)
+- Added `npm run antigravity` script.
+- Added a basic Antigravity playground entry file at `playground/index.js`.
+
 ## 0.2.3
 
 - Migrated project package management from pnpm to npm.

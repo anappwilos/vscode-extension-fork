@@ -56,7 +56,17 @@ This repository has been updated for modern VS Code extension development:
 npm install
 npm run build
 npm run lint
+npm run antigravity
 ```
+
+## VS Code launch profiles
+
+This repository now includes `.vscode/launch.json` with:
+
+- `Run Fork Extension (VS Code)` to start an Extension Development Host.
+- `Run Antigravity Playground` to run `playground/index.js`.
+- `Run VS Code + Antigravity` compound to launch both together.
+
 
 ## Links
 
