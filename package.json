@@ -28,8 +28,8 @@
         "command": "fork.open",
         "title": "Fork: open current git repository in Fork",
         "icon": {
-          "light": "res/fork-icon-light.svg",
-          "dark": "res/fork-icon-dark.svg"
+          "light": "res/icon.webp",
+          "dark": "res/icon.webp"
         }
       }
     ],
