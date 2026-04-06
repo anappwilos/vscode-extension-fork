@@ -19,9 +19,14 @@ Orden de resolución:
 2. `%LOCALAPPDATA%\Fork\Fork.exe`
 3. `%ProgramFiles%\Fork\Fork.exe`
 4. `%ProgramFiles(x86)%\Fork\Fork.exe`
-5. comando `fork` en `PATH` (usado para forzar nueva ventana cuando `fork.forceNewWindow=true`)
+5. comando `fork` en `PATH`
 
 Si no encuentra ejecutable, mostrará error y pedirá configurar `fork.executablePath`.
+
+Cuando `fork.forceNewWindow=true`, la extensión ejecuta dos acciones en secuencia:
+
+1. Abrir una nueva ventana de Fork.
+2. Abrir el repositorio objetivo en Fork pasando la ruta.
 
 ## Arquitectura
 

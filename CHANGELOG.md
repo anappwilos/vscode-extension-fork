@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.3.8
+
+- En Windows con `fork.forceNewWindow=true`, ahora se ejecutan dos pasos: abrir ventana nueva de Fork y luego abrir el repositorio por ruta.
+- Ajuste de smoke tests para validar explícitamente la secuencia de dos ejecuciones.
+
 ## 0.3.7
 
 - Ajuste de visibilidad del acceso rápido: status bar item movido al lado derecho con mayor prioridad.
