@@ -1,38 +1,24 @@
-# VS Code extension quickstart (updated)
+# Quickstart
 
-## Project layout
+## Requisitos
 
-- `package.json`: extension manifest (commands, activation, engines, scripts, settings).
-- `src/index.ts`: extension entry point (`activate` / `deactivate`).
-- `dist/`: build output produced by `tsup`.
+- Node.js LTS (>= 20)
+- npm
 
-## Runtime setting
+## Desarrollo local
 
-- `fork.executablePath`: optional on macOS, required on Windows/Linux.
+```bash
+npm install
+npm run dev
+```
 
-## Run in development
+En VS Code, ejecuta el perfil de launch `Run Fork Extension (VS Code)`.
 
-1. Install dependencies:
-   - `npm install`
-2. Build once:
-   - `npm run build`
-3. Start watch mode while editing:
-   - `npm run dev`
-4. Launch profiles in VS Code (`.vscode/launch.json`):
-   - `Run Fork Extension (VS Code)`
-   - `Run Antigravity Playground`
-   - `Run VS Code + Antigravity` (compound)
+## Validación de calidad
 
-## Quality checks
-
-- Lint source files:
-  - `npm run lint`
-- Run Antigravity helper process:
-  - `npm run antigravity`
-
-## Package and publish
-
-- Create a VSIX package:
-  - `npm run pack`
-- Publish to marketplace:
-  - `npm run publish`
+```bash
+npm run lint
+npm run typecheck
+npm run test
+npm run build
+```

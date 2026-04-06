@@ -1,5 +1,15 @@
 # Change Log
 
+## 0.3.0
+
+- Refactor técnico completo a arquitectura modular por capas (`entry`, `business`, `services`, `config`, `utils`, `types`).
+- Migración del build a `esbuild` con sourcemaps en modo producción y desarrollo.
+- Nuevo stack de calidad: ESLint moderno + Prettier + typecheck estricto.
+- Infraestructura de testing con tests unitarios y smoke tests ejecutables con Node test runner.
+- Nueva gestión de configuración con soporte de `fork.executablePath` + `FORK_EXECUTABLE_PATH`.
+- CI con GitHub Actions para `lint`, `test` y `build`.
+- Scripts npm profesionales: `dev`, `build`, `start`, `lint`, `format`, `format:write`, `test`, `typecheck`, `test:watch`, `prebuild`.
+
 ## 0.2.5
 
 - Replaced deprecated `vsce` package with `@vscode/vsce`.

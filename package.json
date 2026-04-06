@@ -2,7 +2,7 @@
   "publisher": "imyangyong",
   "name": "fork",
   "displayName": "Fork",
-  "version": "0.2.5",
+  "version": "0.3.0",
   "packageManager": "npm@11.4.2",
   "description": "Open the current workspace repository in the Fork desktop app.",
   "repository": {
@@ -15,7 +15,8 @@
   "main": "./dist/index.js",
   "icon": "res/icon.webp",
   "engines": {
-    "vscode": "^1.99.0"
+    "vscode": "^1.99.0",
+    "node": ">=20"
   },
   "activationEvents": [
     "onCommand:fork.open"
@@ -40,22 +41,38 @@
     }
   },
   "scripts": {
+    "clean": "rm -rf dist .test-dist",
+    "dev": "esbuild src/index.ts --bundle --platform=node --format=cjs --target=node20 --outfile=dist/index.js --sourcemap --watch",
+    "prebuild": "npm run lint && npm run typecheck && npm run test",
+    "build": "npm run clean && esbuild src/index.ts --bundle --platform=node --format=cjs --target=node20 --outfile=dist/index.js --sourcemap && esbuild src/entry/start.ts --bundle --platform=node --format=cjs --target=node20 --outfile=dist/start.js --sourcemap",
+    "start": "node dist/start.js",
+    "lint": "eslint .",
+    "format": "prettier --check .",
+    "format:write": "prettier --write .",
+    "typecheck": "tsc --noEmit",
+    "test:compile": "tsc -p tsconfig.test.json",
+    "test": "npm run test:compile && node --test .test-dist/tests/**/*.test.js",
+    "test:watch": "npm run test:compile && node --test --watch .test-dist/tests/**/*.test.js",
     "vscode:prepublish": "npm run build",
-    "build": "NODE_ENV=production tsup",
-    "dev": "NODE_ENV=development tsup --watch",
-    "lint": "eslint src --ext ts",
-    "lint:fix": "eslint --fix src --ext ts",
     "publish": "vsce publish --no-dependencies",
-    "pack": "vsce package --no-dependencies",
-    "antigravity": "node playground/index.js"
+    "pack": "vsce package --no-dependencies"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^4.13.0",
+    "@eslint/js": "^9.26.0",
     "@types/node": "^22.15.12",
     "@types/vscode": "^1.99.0",
+    "@typescript-eslint/eslint-plugin": "^8.32.1",
+    "@typescript-eslint/parser": "^8.32.1",
     "@vscode/vsce": "^3.6.2",
+    "esbuild": "^0.25.3",
     "eslint": "^9.26.0",
-    "tsup": "^8.4.0",
-    "typescript": "^5.8.3"
+    "eslint-config-prettier": "^10.1.2",
+    "globals": "^16.0.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.32.1"
+  },
+  "overrides": {
+    "glob": "^10.4.5"
   }
 }

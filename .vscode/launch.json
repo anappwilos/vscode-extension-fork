@@ -15,21 +15,13 @@
       "preLaunchTask": "npm: build"
     },
     {
-      "name": "Run Antigravity Playground",
+      "name": "Run Runtime Start",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceFolder}/playground/index.js",
+      "program": "${workspaceFolder}/dist/start.js",
+      "preLaunchTask": "npm: build",
       "skipFiles": [
         "<node_internals>/**"
-      ]
-    }
-  ],
-  "compounds": [
-    {
-      "name": "Run VS Code + Antigravity",
-      "configurations": [
-        "Run Fork Extension (VS Code)",
-        "Run Antigravity Playground"
       ]
     }
   ]
