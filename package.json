@@ -2,7 +2,7 @@
   "publisher": "imyangyong",
   "name": "fork",
   "displayName": "Fork",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "packageManager": "pnpm@10.10.0",
   "description": "Open the current workspace repository in the Fork desktop app.",
   "repository": {
@@ -26,7 +26,18 @@
         "command": "fork.open",
         "title": "Fork: open current git repository in Fork"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Fork",
+      "properties": {
+        "fork.executablePath": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Full path to the Fork executable. If empty on macOS, the extension uses `open -a Fork`. On Windows/Linux this setting is required.",
+          "scope": "application"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "pnpm run build",

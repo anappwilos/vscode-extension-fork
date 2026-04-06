@@ -14,10 +14,14 @@ function getActiveWorkspaceFolder(): WorkspaceFolder | undefined {
   return workspace.workspaceFolders?.[0]
 }
 
-async function hasGitDirectory(workspaceUri: Uri): Promise<boolean> {
-  const gitDir = join(workspaceUri.fsPath, '.git')
+function getForkExecutablePath(): string {
+  return workspace.getConfiguration('fork').get<string>('executablePath', '').trim()
+}
+
+async function hasGitMetadata(workspaceUri: Uri): Promise<boolean> {
+  const gitPath = join(workspaceUri.fsPath, '.git')
   try {
-    await access(gitDir)
+    await access(gitPath)
     return true
   }
   catch {
@@ -25,14 +29,9 @@ async function hasGitDirectory(workspaceUri: Uri): Promise<boolean> {
   }
 }
 
-function openRepoInFork(workspaceUri: Uri): Promise<void> {
+function execFileAsync(file: string, args: string[]): Promise<void> {
   return new Promise((resolve, reject) => {
-    if (process.platform !== 'darwin') {
-      reject(new Error('Fork extension currently supports macOS only.'))
-      return
-    }
-
-    execFile('open', ['-a', 'Fork', workspaceUri.fsPath], (error) => {
+    execFile(file, args, (error) => {
       if (error) {
         reject(error)
         return
@@ -41,6 +40,22 @@ function openRepoInFork(workspaceUri: Uri): Promise<void> {
       resolve()
     })
   })
+}
+
+async function openRepoInFork(workspaceUri: Uri): Promise<void> {
+  const executablePath = getForkExecutablePath()
+
+  if (executablePath) {
+    await execFileAsync(executablePath, [workspaceUri.fsPath])
+    return
+  }
+
+  if (process.platform === 'darwin') {
+    await execFileAsync('open', ['-a', 'Fork', workspaceUri.fsPath])
+    return
+  }
+
+  throw new Error('Set "fork.executablePath" to your Fork executable path in VS Code settings.')
 }
 
 export async function activate(context: ExtensionContext) {
@@ -52,7 +67,7 @@ export async function activate(context: ExtensionContext) {
       return
     }
 
-    const isGitRepo = await hasGitDirectory(workspaceFolder.uri)
+    const isGitRepo = await hasGitMetadata(workspaceFolder.uri)
     if (!isGitRepo) {
       window.showErrorMessage('Fork error: selected folder is not a Git repository.')
       return

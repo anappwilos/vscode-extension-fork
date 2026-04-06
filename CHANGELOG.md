@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.2.2
+
+- Added `fork.executablePath` setting in extension configuration.
+- Added support for launching Fork using a custom executable path.
+- Kept macOS fallback (`open -a Fork`) when no path is configured.
+- Improved non-macOS guidance with actionable configuration error message.
+
 ## 0.2.1
 
 - Improved command robustness in `src/index.ts`.

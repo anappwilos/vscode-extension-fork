@@ -7,12 +7,32 @@ A lightweight extension to open your current workspace repository directly in th
 - Adds the command `Fork: open current git repository in Fork`.
 - Uses the active editor workspace folder first, then falls back to the first open workspace folder.
 - Validates that the selected folder is a Git repository before opening.
-- Uses safe process execution (no shell interpolation) to launch Fork.
+- Uses safe process execution (`execFile`) to launch Fork.
+- Supports a configurable executable path via `fork.executablePath`.
 
-## Platform support
+## Configuration
 
-- ✅ macOS: supported (`open -a Fork ...`)
-- ⚠️ Windows / Linux: not supported yet by this extension command.
+### `fork.executablePath`
+
+Set the full path to the Fork executable in VS Code settings.
+
+```json
+{
+  "fork.executablePath": ""
+}
+```
+
+- If empty on **macOS**, the extension uses `open -a Fork`.
+- On **Windows/Linux**, set this path explicitly.
+
+Examples:
+
+- macOS app binary:
+  - `/Applications/Fork.app/Contents/MacOS/Fork`
+- Windows:
+  - `C:\\Users\\<you>\\AppData\\Local\\Fork\\Fork.exe`
+- Linux (if installed via custom path):
+  - `/opt/Fork/fork`
 
 ## 2026 refresh
 
@@ -26,8 +46,9 @@ This repository has been updated for modern VS Code extension development:
 ## Usage
 
 1. Open a Git repository folder in VS Code.
-2. Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`).
-3. Run `Fork: open current git repository in Fork`.
+2. (Windows/Linux) Configure `fork.executablePath`.
+3. Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`).
+4. Run `Fork: open current git repository in Fork`.
 
 ## Development
 

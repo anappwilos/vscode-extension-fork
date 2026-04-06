@@ -2,9 +2,13 @@
 
 ## Project layout
 
-- `package.json`: extension manifest (commands, activation, engines, scripts).
+- `package.json`: extension manifest (commands, activation, engines, scripts, settings).
 - `src/index.ts`: extension entry point (`activate` / `deactivate`).
 - `dist/`: build output produced by `tsup`.
+
+## Runtime setting
+
+- `fork.executablePath`: optional on macOS, required on Windows/Linux.
 
 ## Run in development
 
