@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.3.13
+
+- Se restauran los archivos de `.vscode/` (launch/tasks/extensions) para mantener soporte de desarrollo dentro de VS Code.
+
 ## 0.3.12
 
 - Limpieza de archivos no esenciales del repositorio (`.vscode/*`, `vsc-extension-quickstart.md`, `tsup.config.ts`).
