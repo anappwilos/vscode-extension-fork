@@ -38,7 +38,6 @@ Estructura modular y mantenible:
 - `src/config`: configuración
 - `src/utils`: utilidades compartidas
 - `src/types`: tipos e interfaces
-- `tests`: unit tests y smoke tests
 
 ## Configuración
 
@@ -72,8 +71,6 @@ npm run lint
 npm run format
 npm run format:write
 npm run typecheck
-npm run test
-npm run test:watch
 ```
 
 ## Flujo recomendado de release
@@ -81,16 +78,7 @@ npm run test:watch
 1. Actualizar versión y `CHANGELOG.md`.
 2. Ejecutar validaciones locales:
    - `npm run lint`
-   - `npm run test`
+   - `npm run typecheck`
    - `npm run build`
 3. Generar artefacto reproducible:
    - `npm run pack`
-
-## CI
-
-Se incluye workflow de GitHub Actions (`.github/workflows/ci.yml`) que ejecuta:
-
-- instalación (`npm ci`)
-- lint
-- tests
-- build
