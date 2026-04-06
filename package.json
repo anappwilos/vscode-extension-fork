@@ -2,9 +2,9 @@
   "publisher": "imyangyong",
   "name": "fork",
   "displayName": "Fork",
-  "version": "0.1.0",
-  "packageManager": "pnpm@10.10.0",
-  "description": "",
+  "version": "0.2.4",
+  "packageManager": "npm@11.4.2",
+  "description": "Open the current workspace repository in the Fork desktop app.",
   "repository": {
     "type": "git",
     "url": "https://github.com/imyangyong/vscode-extension-fork"
@@ -15,7 +15,7 @@
   "main": "./dist/index.js",
   "icon": "res/icon.webp",
   "engines": {
-    "vscode": "^1.71.0"
+    "vscode": "^1.99.0"
   },
   "activationEvents": [
     "onCommand:fork.open"
@@ -24,23 +24,35 @@
     "commands": [
       {
         "command": "fork.open",
-        "title": "Fork: open current git repository at fork app"
+        "title": "Fork: open current git repository in Fork"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Fork",
+      "properties": {
+        "fork.executablePath": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Full path to the Fork executable. If empty on macOS, the extension uses `open -a Fork`. On Windows/Linux this setting is required.",
+          "scope": "application"
+        }
+      }
+    }
   },
   "scripts": {
-    "vscode:prepublish": "pnpm run build",
+    "vscode:prepublish": "npm run build",
     "build": "NODE_ENV=production tsup",
     "dev": "NODE_ENV=development tsup --watch",
     "lint": "eslint src --ext ts",
     "lint:fix": "eslint --fix src --ext ts",
     "publish": "vsce publish --no-dependencies",
-    "pack": "vsce package --no-dependencies"
+    "pack": "vsce package --no-dependencies",
+    "antigravity": "node playground/index.js"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.13.0",
     "@types/node": "^22.15.12",
-    "@types/vscode": "^1.71.0",
+    "@types/vscode": "^1.99.0",
     "eslint": "^9.26.0",
     "pnpm": "^10.10.0",
     "tsup": "^8.4.0",
