@@ -20,7 +20,7 @@ export async function resolveWindowsForkExecutable(configuredPath: string): Prom
     configuredPath,
     process.env.LOCALAPPDATA ? join(process.env.LOCALAPPDATA, 'Fork', 'current', 'fork.exe') : '',
     process.env.LOCALAPPDATA ? join(process.env.LOCALAPPDATA, 'Fork', 'Fork.exe') : '',
-    process.env['ProgramFiles'] ? join(process.env['ProgramFiles'], 'Fork', 'Fork.exe') : '',
+    process.env.ProgramFiles ? join(process.env.ProgramFiles, 'Fork', 'Fork.exe') : '',
     process.env['ProgramFiles(x86)'] ? join(process.env['ProgramFiles(x86)'], 'Fork', 'Fork.exe') : '',
     userProfile ? join(userProfile, 'AppData', 'Local', 'Fork', 'current', 'fork.exe') : '',
     userProfile ? join(userProfile, 'AppData', 'Local', 'Fork', 'Fork.exe') : '',
@@ -49,9 +49,7 @@ export async function openRepositoryInFork(context: LaunchContext, run: ExecFile
   }
 
   if (context.forceNewWindow) {
-    // Similar to:
-    // C:\...\fork.exe && start "" "C:\...\fork.exe" "C:\...\repo"
-    await run(executable, [])
+    await run('cmd', ['/c', 'start', '', executable])
     await run('cmd', ['/c', 'start', '', executable, context.repositoryPath])
     return
   }
