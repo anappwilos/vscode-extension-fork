@@ -4,7 +4,7 @@ export interface WorkspaceSelectionInput {
 }
 
 export interface LaunchContext {
-  platform: NodeJS.Platform
+  platform: string
   executablePath: string
   repositoryPath: string
 }
