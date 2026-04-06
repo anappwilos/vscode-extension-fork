@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.3.12
+
+- Limpieza de archivos no esenciales del repositorio (`.vscode/*`, `vsc-extension-quickstart.md`, `tsup.config.ts`).
+- Se mantiene únicamente el set mínimo necesario para ejecución, build, pruebas y release.
+
 ## 0.3.11
 
 - Implementación de apertura estilo Windows solicitada: `fork.exe` y luego `cmd /c start "" "fork.exe" "<repo>"`.
