@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.3.9
+
+- Optimización de activación/comando: resolución de `Fork.exe` con caché (`globalState`) y re-búsqueda solo en primera ejecución o cuando la ruta desaparece.
+- Se agrega setting `fork.runtimeOS` actualizado automáticamente con el sistema operativo en uso.
+- Se añaden logs de traza (`log.trace`) para diagnóstico del flujo de resolución y ejecución.
+- Ajuste de apertura de repositorio para asegurar que, tras abrir nueva ventana, también se abra la ruta del repo.
+
 ## 0.3.8
 
 - En Windows con `fork.forceNewWindow=true`, ahora se ejecutan dos pasos: abrir ventana nueva de Fork y luego abrir el repositorio por ruta.

@@ -2,7 +2,7 @@
   "publisher": "imyangyong",
   "name": "fork",
   "displayName": "Fork",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "packageManager": "npm@11.4.2",
   "description": "Open the current workspace repository in the Fork desktop app.",
   "repository": {
@@ -45,6 +45,12 @@
           "type": "boolean",
           "default": true,
           "markdownDescription": "For Windows, try to use the `fork` CLI to force opening repositories in a new window.",
+          "scope": "application"
+        },
+        "fork.runtimeOS": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Runtime OS detected by the extension (managed automatically).",
           "scope": "application"
         }
       }

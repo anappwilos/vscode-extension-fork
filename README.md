@@ -46,6 +46,9 @@ La ruta de Fork se configura desde VS Code:
 
 - setting: `fork.executablePath`
 - setting: `fork.forceNewWindow` (default `true`)
+- setting: `fork.runtimeOS` (actualizado automáticamente por la extensión)
+
+La búsqueda de ubicación de Fork no se ejecuta en cada comando: usa caché y solo vuelve a buscar si es primera ejecución o si la ruta configurada/cached ya no existe.
 
 ## UI
 
@@ -55,7 +58,8 @@ La ruta de Fork se configura desde VS Code:
 
 ## Logging
 
-La extensión escribe logs con `log.info` / `log.error` en el canal de salida **Fork**.
+La extensión escribe logs con `log.trace` / `log.info` / `log.error` en el canal de salida **Fork**.
+
 
 ## Scripts principales
 
