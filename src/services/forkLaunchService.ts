@@ -38,6 +38,17 @@ export async function openRepositoryInFork(context: LaunchContext, run: ExecFile
     throw new Error('Fork extension: por el momento solo es viable en Windows.')
   }
 
+  if (context.forceNewWindow) {
+    try {
+      // Fork CLI behavior: opens repository in a new window.
+      await run('fork', [context.repositoryPath])
+      return
+    }
+    catch {
+      // Fallback to executable discovery below.
+    }
+  }
+
   const executable = await resolveWindowsForkExecutable(context.executablePath)
 
   try {

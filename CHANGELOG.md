@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.3.6
+
+- Se agrega setting `fork.forceNewWindow` (default `true`).
+- En Windows, cuando está activo, se intenta lanzar `fork <repo>` para forzar apertura en nueva ventana.
+- Fallback automático a `Fork.exe` si el CLI `fork` no está disponible.
+
 ## 0.3.5
 
 - Se agrega ícono/botón en la barra inferior de VS Code para ejecutar `fork.open`.

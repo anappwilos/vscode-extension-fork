@@ -2,7 +2,7 @@
   "publisher": "imyangyong",
   "name": "fork",
   "displayName": "Fork",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "packageManager": "npm@11.4.2",
   "description": "Open the current workspace repository in the Fork desktop app.",
   "repository": {
@@ -35,6 +35,12 @@
           "type": "string",
           "default": "",
           "markdownDescription": "Full path to the Fork executable. If empty on macOS, the extension uses `open -a Fork`. On Windows/Linux this setting is required.",
+          "scope": "application"
+        },
+        "fork.forceNewWindow": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "For Windows, try to use the `fork` CLI to force opening repositories in a new window.",
           "scope": "application"
         }
       }

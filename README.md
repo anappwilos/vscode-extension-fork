@@ -19,7 +19,7 @@ Orden de resolución:
 2. `%LOCALAPPDATA%\Fork\Fork.exe`
 3. `%ProgramFiles%\Fork\Fork.exe`
 4. `%ProgramFiles(x86)%\Fork\Fork.exe`
-5. comando `fork` en `PATH`
+5. comando `fork` en `PATH` (usado para forzar nueva ventana cuando `fork.forceNewWindow=true`)
 
 Si no encuentra ejecutable, mostrará error y pedirá configurar `fork.executablePath`.
 
@@ -40,6 +40,7 @@ Estructura modular y mantenible:
 La ruta de Fork se configura desde VS Code:
 
 - setting: `fork.executablePath`
+- setting: `fork.forceNewWindow` (default `true`)
 
 ## UI
 

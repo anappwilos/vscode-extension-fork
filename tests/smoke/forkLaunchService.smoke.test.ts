@@ -14,12 +14,35 @@ test('smoke: openRepositoryInFork should use configured executable path on Windo
       platform: 'win32',
       executablePath: 'C:/Fork/Fork.exe',
       repositoryPath: 'C:/tmp/repo',
+      forceNewWindow: false,
     },
     runner,
   )
 
   assert.equal(calls.length, 1)
   assert.equal(calls[0].file, 'C:/Fork/Fork.exe')
+  assert.deepEqual(calls[0].args, ['C:/tmp/repo'])
+})
+
+test('smoke: openRepositoryInFork should force new window via fork cli', async () => {
+  const calls: Array<{ file: string, args: string[] }> = []
+
+  const runner = async (file: string, args: string[]) => {
+    calls.push({ file, args })
+  }
+
+  await openRepositoryInFork(
+    {
+      platform: 'win32',
+      executablePath: '',
+      repositoryPath: 'C:/tmp/repo',
+      forceNewWindow: true,
+    },
+    runner,
+  )
+
+  assert.equal(calls.length, 1)
+  assert.equal(calls[0].file, 'fork')
   assert.deepEqual(calls[0].args, ['C:/tmp/repo'])
 })
 
@@ -31,6 +54,7 @@ test('smoke: openRepositoryInFork should fail for non-Windows platforms', async 
           platform: 'darwin',
           executablePath: '',
           repositoryPath: '/tmp/repo',
+          forceNewWindow: true,
         },
         async () => {},
       ),

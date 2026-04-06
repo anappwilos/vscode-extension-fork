@@ -12,6 +12,10 @@ function getVscodeConfiguredExecutablePath(): string {
   return workspace.getConfiguration('fork').get<string>('executablePath', '')
 }
 
+function getForceNewWindowSetting(): boolean {
+  return workspace.getConfiguration('fork').get<boolean>('forceNewWindow', true)
+}
+
 function getCurrentWorkspaceSelection(): string | undefined {
   const activeEditorPath = window.activeTextEditor
     ? workspace.getWorkspaceFolder(window.activeTextEditor.document.uri)?.uri.fsPath
@@ -68,7 +72,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
       return
     }
 
-    const config = createAppConfig(getVscodeConfiguredExecutablePath())
+    const config = createAppConfig(getVscodeConfiguredExecutablePath(), getForceNewWindowSetting())
 
     try {
       await openRepositoryInFork(
@@ -76,6 +80,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
           platform: process.platform,
           executablePath: config.forkExecutablePath,
           repositoryPath,
+          forceNewWindow: config.forceNewWindow,
         },
         execFileRunner,
       )
