@@ -2,7 +2,7 @@
   "publisher": "AnAppWilos",
   "name": "an-fork-quick-access",
   "displayName": "an-fork-quick-access",
-  "version": "0.4.0",
+  "version": "0.3.20",
   "license": "MIT",
   "packageManager": "npm@11.4.2",
   "description": "Open the current workspace repository in the Fork desktop app.",
@@ -82,20 +82,6 @@
           "scope": "application"
         }
       }
-    },
-    "menus": {
-      "scm/title": [
-        {
-          "command": "fork.open",
-          "group": "navigation@9"
-        }
-      ],
-      "editor/title": [
-        {
-          "command": "fork.open",
-          "group": "navigation@9"
-        }
-      ]
     }
   },
   "scripts": {

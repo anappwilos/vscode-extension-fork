@@ -94,7 +94,6 @@ function createForkStatusBarItem(): StatusBarItem {
   const item = window.createStatusBarItem(StatusBarAlignment.Right, 100)
   item.name = 'Fork Open Repository'
   item.text = '$(fork-custom)'
-  item.tooltip = 'Fork: Open current repository'
   item.command = 'fork.open'
   item.show()
 
@@ -117,7 +116,6 @@ export async function activate(context: ExtensionContext): Promise<void> {
 
   const disposable = commands.registerCommand('fork.open', async () => {
     log.info('fork.open command triggered')
-    logChannel.show(true)
 
     const repositoryPath = getCurrentWorkspaceSelection()
 
