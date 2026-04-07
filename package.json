@@ -2,7 +2,7 @@
   "publisher": "AnAppWilos",
   "name": "an-fork-quick-access",
   "displayName": "an-fork-quick-access",
-  "version": "0.3.21",
+  "version": "0.3.22",
   "license": "MIT",
   "packageManager": "npm@11.4.2",
   "description": "Open the current workspace repository in the Fork desktop app.",
@@ -10,6 +10,13 @@
     "type": "git",
     "url": "https://github.com/imyangyong/vscode-extension-fork"
   },
+  "files": [
+    "dist/**",
+    "res/**",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
   "categories": [
     "Other"
   ],
@@ -27,7 +34,7 @@
       "fork-custom": {
         "description": "Fork app icon",
         "default": {
-          "fontPath": "./res/icons/anqafork2.woff",
+          "fontPath": "res/icons/anqafork.woff",
           "fontCharacter": "\\E900"
         }
       }
@@ -85,7 +92,7 @@
     }
   },
   "scripts": {
-    "clean": "rm -rf dist",
+    "clean": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\"",
     "dev": "esbuild src/index.ts --bundle --platform=node --format=cjs --target=node20 --external:vscode --outfile=dist/index.js --sourcemap --watch",
     "prebuild": "npm run lint && npm run typecheck",
     "build": "npm run clean && esbuild src/index.ts --bundle --platform=node --format=cjs --target=node20 --external:vscode --outfile=dist/index.js --sourcemap",
