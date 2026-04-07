@@ -2,7 +2,7 @@
   "publisher": "imyangyong",
   "name": "fork",
   "displayName": "Fork",
-  "version": "0.3.15",
+  "version": "0.3.16",
   "packageManager": "npm@11.4.2",
   "description": "Open the current workspace repository in the Fork desktop app.",
   "repository": {
@@ -46,6 +46,19 @@
           "type": "boolean",
           "default": true,
           "markdownDescription": "For Windows, try to use the `fork` CLI to force opening repositories in a new window.",
+          "scope": "application"
+        },
+        "fork.logLevel": {
+          "type": "string",
+          "default": "info",
+          "enum": ["trace", "info", "error", "off"],
+          "enumDescriptions": [
+            "Show all messages including verbose diagnostic traces.",
+            "Show informational messages and errors (default).",
+            "Show errors only.",
+            "Disable all log output."
+          ],
+          "markdownDescription": "Controls the verbosity of the Fork extension log output.",
           "scope": "application"
         },
         "fork.runtimeOS": {

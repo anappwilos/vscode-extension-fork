@@ -41,19 +41,19 @@ export async function resolveWindowsForkExecutable(configuredPath: string, logge
 
   logger.trace('Resolving Fork executable...')
   logger.trace(`Configured path: ${configuredPath || '(empty)'}`)
-  logger.trace(`Candidates: ${JSON.stringify(uniqueCandidates)}`)
+  logger.trace(`Candidates:\n  ${uniqueCandidates.join('\n  ')}`)
 
   for (const candidate of uniqueCandidates) {
     const exists = await canAccess(candidate)
     logger.trace(`Checking candidate: ${candidate} -> ${exists ? 'OK' : 'NOT FOUND'}`)
 
     if (exists) {
-      logger.trace(`Fork found at: ${candidate}`)
+      logger.info(`Fork found at: ${candidate}`)
       return candidate
     }
   }
 
-  logger.trace('No valid Fork executable found.')
+  logger.info('No valid Fork executable found.')
   return ''
 }
 
@@ -76,14 +76,14 @@ async function openRepositoryInForkNewWindow(
     repositoryPath,
   ]
 
-  logger.trace('New window mode enabled.')
-  logger.trace(`Executable: ${executable}`)
-  logger.trace(`Repository: ${repositoryPath}`)
-  logger.trace(`Args: ${JSON.stringify(args)}`)
+  logger.trace('New window mode: launching Fork twice via cmd.exe')
+  logger.trace(`  executable:  ${executable}`)
+  logger.trace(`  repository:  ${repositoryPath}`)
+  logger.trace(`  command:     start "" "${executable}" && start "" "${executable}" "${repositoryPath}"`)
 
   try {
     await run('cmd.exe', args)
-    logger.trace('Command executed successfully.')
+    logger.info('Fork launched in new window successfully.')
   }
   catch (error) {
     logger.error(`Error executing cmd.exe: ${error instanceof Error ? error.message : String(error)}`)
@@ -92,7 +92,11 @@ async function openRepositoryInForkNewWindow(
 }
 
 export async function openRepositoryInFork(context: LaunchContext, run: ExecFileRunner, logger: Logger): Promise<void> {
-  logger.trace(`openRepositoryInFork called: platform=${context.platform}, executablePath=${context.executablePath ?? ''}, repositoryPath=${context.repositoryPath}, forceNewWindow=${context.forceNewWindow}`)
+  logger.trace('openRepositoryInFork called')
+  logger.trace(`  platform:       ${context.platform}`)
+  logger.trace(`  executablePath: ${context.executablePath || '(none)'}`)
+  logger.trace(`  repositoryPath: ${context.repositoryPath}`)
+  logger.trace(`  forceNewWindow: ${context.forceNewWindow}`)
 
   if (context.platform !== 'win32') {
     throw new Error('Fork extension: only Windows is currently supported.')
@@ -114,12 +118,12 @@ export async function openRepositoryInFork(context: LaunchContext, run: ExecFile
   }
 
   logger.trace('Normal mode. Opening Fork with repository directly.')
-  logger.trace(`Executable: ${executable}`)
-  logger.trace(`Repository: ${repositoryPath}`)
+  logger.trace(`  executable:  ${executable}`)
+  logger.trace(`  repository:  ${repositoryPath}`)
 
   try {
     await run(executable, [repositoryPath])
-    logger.trace('Fork launched successfully.')
+    logger.info(`Fork launched for: ${repositoryPath}`)
   }
   catch (error) {
     logger.error(`Error opening Fork: ${error instanceof Error ? error.message : String(error)}`)
