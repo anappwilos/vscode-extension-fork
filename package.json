@@ -2,7 +2,7 @@
   "publisher": "imyangyong",
   "name": "fork",
   "displayName": "Fork",
-  "version": "0.3.16",
+  "version": "0.3.17",
   "packageManager": "npm@11.4.2",
   "description": "Open the current workspace repository in the Fork desktop app.",
   "repository": {
@@ -19,10 +19,18 @@
     "node": ">=20"
   },
   "activationEvents": [
-    "onStartupFinished",
-    "onCommand:fork.open"
+    "onStartupFinished"
   ],
   "contributes": {
+    "icons": {
+      "fork-custom": {
+        "description": "Fork app icon",
+        "default": {
+          "fontPath": "./res/icons/anqafork2.woff",
+          "fontCharacter": "\\E900"
+        }
+      }
+    },
     "commands": [
       {
         "command": "fork.open",
@@ -51,7 +59,12 @@
         "fork.logLevel": {
           "type": "string",
           "default": "info",
-          "enum": ["trace", "info", "error", "off"],
+          "enum": [
+            "trace",
+            "info",
+            "error",
+            "off"
+          ],
           "enumDescriptions": [
             "Show all messages including verbose diagnostic traces.",
             "Show informational messages and errors (default).",
