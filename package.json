@@ -1,50 +1,127 @@
 {
-  "publisher": "imyangyong",
-  "name": "fork",
-  "displayName": "Fork",
-  "version": "0.1.0",
-  "packageManager": "pnpm@10.10.0",
-  "description": "",
+  "publisher": "AnAppWilos",
+  "name": "an-fork-quick-access",
+  "displayName": "an-fork-quick-access",
+  "version": "0.4.0",
+  "license": "MIT",
+  "packageManager": "npm@11.4.2",
+  "description": "Open the current workspace repository in the Fork desktop app.",
   "repository": {
     "type": "git",
     "url": "https://github.com/imyangyong/vscode-extension-fork"
   },
+  "files": [
+    "dist/**",
+    "res/**",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
   "categories": [
     "Other"
   ],
   "main": "./dist/index.js",
   "icon": "res/icon.webp",
   "engines": {
-    "vscode": "^1.71.0"
+    "vscode": "^1.99.0",
+    "node": ">=20"
   },
   "activationEvents": [
-    "onCommand:fork.open"
+    "onStartupFinished"
   ],
   "contributes": {
+    "icons": {
+      "fork-custom": {
+        "description": "Fork app icon",
+        "default": {
+          "fontPath": "res/icons/anqafork.woff",
+          "fontCharacter": "\\E900"
+        }
+      }
+    },
     "commands": [
       {
         "command": "fork.open",
-        "title": "Fork: open current git repository at fork app"
+        "title": "Fork: open current git repository in Fork",
+        "icon": {
+          "light": "res/icon.webp",
+          "dark": "res/icon.webp"
+        }
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Fork",
+      "properties": {
+        "fork.executablePath": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Full path to the Fork executable. If empty on macOS, the extension uses `open -a Fork`. On Windows/Linux this setting is required.",
+          "scope": "application"
+        },
+        "fork.forceNewWindow": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "For Windows, try to use the `fork` CLI to force opening repositories in a new window.",
+          "scope": "application"
+        },
+        "fork.logLevel": {
+          "type": "string",
+          "default": "info",
+          "enum": [
+            "trace",
+            "info",
+            "error",
+            "off"
+          ],
+          "enumDescriptions": [
+            "Show all messages including verbose diagnostic traces.",
+            "Show informational messages and errors (default).",
+            "Show errors only.",
+            "Disable all log output."
+          ],
+          "markdownDescription": "Controls the verbosity of the Fork extension log output.",
+          "scope": "application"
+        },
+        "fork.runtimeOS": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Runtime OS detected by the extension (managed automatically).",
+          "scope": "application"
+        }
+      }
+    }
   },
   "scripts": {
-    "vscode:prepublish": "pnpm run build",
-    "build": "NODE_ENV=production tsup",
-    "dev": "NODE_ENV=development tsup --watch",
-    "lint": "eslint src --ext ts",
-    "lint:fix": "eslint --fix src --ext ts",
+    "clean": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\"",
+    "dev": "esbuild src/index.ts --bundle --platform=node --format=cjs --target=node20 --external:vscode --outfile=dist/index.js --sourcemap --watch",
+    "prebuild": "npm run lint && npm run typecheck",
+    "build": "npm run clean && esbuild src/index.ts --bundle --platform=node --format=cjs --target=node20 --external:vscode --outfile=dist/index.js --sourcemap",
+    "start": "node -e \"console.log('Use VS Code Extension Host (F5) to run the extension.')\"",
+    "lint": "eslint .",
+    "format": "prettier --check .",
+    "format:write": "prettier --write .",
+    "typecheck": "tsc --noEmit",
+    "vscode:prepublish": "npm run build",
     "publish": "vsce publish --no-dependencies",
-    "pack": "vsce package --no-dependencies"
+    "pack": "vsce package --no-dependencies",
+    "antigravity": "node playground/index.js"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^4.13.0",
+    "@eslint/js": "^9.26.0",
     "@types/node": "^22.15.12",
-    "@types/vscode": "^1.71.0",
+    "@types/vscode": "^1.99.0",
+    "@typescript-eslint/eslint-plugin": "^8.32.1",
+    "@typescript-eslint/parser": "^8.32.1",
+    "@vscode/vsce": "^3.6.2",
+    "esbuild": "^0.25.3",
     "eslint": "^9.26.0",
-    "pnpm": "^10.10.0",
-    "tsup": "^8.4.0",
+    "eslint-config-prettier": "^10.1.2",
+    "globals": "^16.0.0",
+    "prettier": "^3.5.3",
     "typescript": "^5.8.3",
-    "vsce": "^2.10.0"
+    "typescript-eslint": "^8.32.1"
+  },
+  "overrides": {
+    "glob": "^10.4.5"
   }
 }
