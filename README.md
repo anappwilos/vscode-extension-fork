@@ -1,73 +1,83 @@
-# Fork (VS Code Extension)
+# an-fork-quick-access
 
-A lightweight extension to open your current workspace repository directly in the [Fork](https://fork.dev/) desktop app.
+VS Code extension to open the current Git repository directly in the **Fork** desktop application.
 
-## Features
+## Current Platform Status (2026)
 
-- Adds the command `Fork: open current git repository in Fork`.
-- Uses the active editor workspace folder first, then falls back to the first open workspace folder.
-- Validates that the selected folder is a Git repository before opening.
-- Uses safe process execution (`execFile`) to launch Fork.
-- Supports a configurable executable path via `fork.executablePath`.
+> **At the moment, this extension should be considered viable only on Windows.**
+
+Reference research:
+
+- Fork is presented as a Mac and Windows app on its official site: https://fork.dev/releasenotes
+- A Windows distribution is available via winget (`Fork.Fork`): https://winget.run/pkg/Fork/Fork
+
+## How Fork Is Resolved on Windows
+
+Resolution order:
+
+1. `fork.executablePath` (if you define it in VS Code)
+2. `%LOCALAPPDATA%\Fork\Fork.exe`
+3. `%ProgramFiles%\Fork\Fork.exe`
+4. `%ProgramFiles(x86)%\Fork\Fork.exe`
+5. `fork` command in `PATH`
+
+If no executable is found, the extension shows an error and asks you to configure `fork.executablePath`.
+
+When `fork.forceNewWindow=true`, the extension runs two actions in sequence:
+
+1. Open a new Fork window (`fork.exe`).
+2. Run `cmd /c start "" "fork.exe" "<repo-path>"` to open the repository in that new instance.
+
+## Architecture
+
+Modular and maintainable structure:
+
+- `src/entry`: extension entry point (`vscode`)
+- `src/business`: pure business logic
+- `src/services`: filesystem and process execution integration
+- `src/config`: configuration
+- `src/utils`: shared utilities
+- `src/types`: types and interfaces
 
 ## Configuration
 
-### `fork.executablePath`
+The Fork path is configured from VS Code:
 
-Set the full path to the Fork executable in VS Code settings.
+- setting: `fork.executablePath`
+- setting: `fork.forceNewWindow` (default `true`)
+- setting: `fork.runtimeOS` (updated automatically by the extension)
 
-```json
-{
-  "fork.executablePath": ""
-}
-```
+Fork location lookup does not run on every command: it uses a cache and only searches again on first run or if the configured/cached path no longer exists.
 
-- If empty on **macOS**, the extension uses `open -a Fork`.
-- On **Windows/Linux**, set this path explicitly.
+## UI
 
-Examples:
+- The extension activates automatically when VS Code starts (`onStartupFinished`), without needing to run the command first.
+- A `Fork` icon/button is shown in the VS Code bottom bar (right side).
+- An icon action is also added to `SCM title` and `editor title` for quick access.
+- Clicking it runs the `fork.open` command.
 
-- macOS app binary:
-  - `/Applications/Fork.app/Contents/MacOS/Fork`
-- Windows:
-  - `C:\\Users\\<you>\\AppData\\Local\\Fork\\Fork.exe`
-- Linux (if installed via custom path):
-  - `/opt/Fork/fork`
+## Logging
 
-## 2026 refresh
+The extension writes logs with `log.trace` / `log.info` / `log.error` to the **Fork** output channel.
 
-This repository has been updated for modern VS Code extension development:
-
-- Manifest compatibility updated to current VS Code API ranges.
-- Metadata and command text polished for marketplace clarity.
-- Project docs refreshed to match the real source layout (`src/index.ts`).
-- Command implementation hardened with repository validation and clearer errors.
-
-## Usage
-
-1. Open a Git repository folder in VS Code.
-2. (Windows/Linux) Configure `fork.executablePath`.
-3. Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`).
-4. Run `Fork: open current git repository in Fork`.
-
-## Development
+## Main Scripts
 
 ```bash
-npm install
+npm run dev
 npm run build
+npm run start
 npm run lint
-npm run antigravity
+npm run format
+npm run format:write
+npm run typecheck
 ```
 
-## VS Code launch profiles
+## Recommended Release Flow
 
-This repository now includes `.vscode/launch.json` with:
-
-- `Run Fork Extension (VS Code)` to start an Extension Development Host.
-- `Run Antigravity Playground` to run `playground/index.js`.
-- `Run VS Code + Antigravity` compound to launch both together.
-
-
-## Links
-
-- Issues: https://github.com/imyangyong/vscode-extension-fork/issues
+1. Update the version and `CHANGELOG.md`.
+2. Run local validations:
+   - `npm run lint`
+   - `npm run typecheck`
+   - `npm run build`
+3. Generate a reproducible artifact:
+   - `npm run pack`
