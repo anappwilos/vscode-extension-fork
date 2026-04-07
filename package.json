@@ -103,7 +103,8 @@
     "typecheck": "tsc --noEmit",
     "vscode:prepublish": "npm run build",
     "publish": "vsce publish --no-dependencies",
-    "pack": "vsce package --no-dependencies"
+    "pack": "vsce package --no-dependencies",
+    "antigravity": "node playground/index.js"
   },
   "devDependencies": {
     "@eslint/js": "^9.26.0",
