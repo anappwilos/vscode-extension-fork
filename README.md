@@ -1,67 +1,66 @@
-# Fork VS Code Extension
+# an-fork-quick-access
 
-Extensión de VS Code para abrir el repositorio Git actual directamente en la app de escritorio **Fork**.
+VS Code extension to open the current Git repository directly in the **Fork** desktop application.
 
-## Estado actual de plataforma (2026)
+## Current Platform Status (2026)
 
-> **Por ahora esta extensión se considera viable solo en Windows.**
+> **At the moment, this extension should be considered viable only on Windows.**
 
-Investigación de referencia:
+Reference research:
 
-- Fork se presenta como app para Mac y Windows en su sitio oficial: https://fork.dev/releasenotes
-- Existe distribución en Windows vía winget (`Fork.Fork`): https://winget.run/pkg/Fork/Fork
+- Fork is presented as a Mac and Windows app on its official site: https://fork.dev/releasenotes
+- A Windows distribution is available via winget (`Fork.Fork`): https://winget.run/pkg/Fork/Fork
 
-## Cómo encuentra Fork en Windows
+## How Fork Is Resolved on Windows
 
-Orden de resolución:
+Resolution order:
 
-1. `fork.executablePath` (si lo defines en VS Code)
+1. `fork.executablePath` (if you define it in VS Code)
 2. `%LOCALAPPDATA%\Fork\Fork.exe`
 3. `%ProgramFiles%\Fork\Fork.exe`
 4. `%ProgramFiles(x86)%\Fork\Fork.exe`
-5. comando `fork` en `PATH`
+5. `fork` command in `PATH`
 
-Si no encuentra ejecutable, mostrará error y pedirá configurar `fork.executablePath`.
+If no executable is found, the extension shows an error and asks you to configure `fork.executablePath`.
 
-Cuando `fork.forceNewWindow=true`, la extensión ejecuta dos acciones en secuencia:
+When `fork.forceNewWindow=true`, the extension runs two actions in sequence:
 
-1. Abrir una nueva ventana de Fork (`fork.exe`).
-2. Ejecutar `cmd /c start "" "fork.exe" "<ruta-repo>"` para abrir el repo en esa nueva instancia.
+1. Open a new Fork window (`fork.exe`).
+2. Run `cmd /c start "" "fork.exe" "<repo-path>"` to open the repository in that new instance.
 
-## Arquitectura
+## Architecture
 
-Estructura modular y mantenible:
+Modular and maintainable structure:
 
-- `src/entry`: entrada de la extensión (`vscode`)
-- `src/business`: lógica de negocio pura
-- `src/services`: integración con sistema de archivos y ejecución de procesos
-- `src/config`: configuración
-- `src/utils`: utilidades compartidas
-- `src/types`: tipos e interfaces
+- `src/entry`: extension entry point (`vscode`)
+- `src/business`: pure business logic
+- `src/services`: filesystem and process execution integration
+- `src/config`: configuration
+- `src/utils`: shared utilities
+- `src/types`: types and interfaces
 
-## Configuración
+## Configuration
 
-La ruta de Fork se configura desde VS Code:
+The Fork path is configured from VS Code:
 
 - setting: `fork.executablePath`
 - setting: `fork.forceNewWindow` (default `true`)
-- setting: `fork.runtimeOS` (actualizado automáticamente por la extensión)
+- setting: `fork.runtimeOS` (updated automatically by the extension)
 
-La búsqueda de ubicación de Fork no se ejecuta en cada comando: usa caché y solo vuelve a buscar si es primera ejecución o si la ruta configurada/cached ya no existe.
+Fork location lookup does not run on every command: it uses a cache and only searches again on first run or if the configured/cached path no longer exists.
 
 ## UI
 
-- La extensión se activa automáticamente al iniciar VS Code (`onStartupFinished`), sin tener que ejecutar primero el comando.
-- Se muestra un ícono/botón `Fork` en la barra inferior de VS Code (lado derecho).
-- También se agrega acción con ícono en `SCM title` y `editor title` para acceso rápido.
-- Al hacer clic, ejecuta el comando `fork.open`.
+- The extension activates automatically when VS Code starts (`onStartupFinished`), without needing to run the command first.
+- A `Fork` icon/button is shown in the VS Code bottom bar (right side).
+- An icon action is also added to `SCM title` and `editor title` for quick access.
+- Clicking it runs the `fork.open` command.
 
 ## Logging
 
-La extensión escribe logs con `log.trace` / `log.info` / `log.error` en el canal de salida **Fork**.
+The extension writes logs with `log.trace` / `log.info` / `log.error` to the **Fork** output channel.
 
-
-## Scripts principales
+## Main Scripts
 
 ```bash
 npm run dev
@@ -73,12 +72,12 @@ npm run format:write
 npm run typecheck
 ```
 
-## Flujo recomendado de release
+## Recommended Release Flow
 
-1. Actualizar versión y `CHANGELOG.md`.
-2. Ejecutar validaciones locales:
+1. Update the version and `CHANGELOG.md`.
+2. Run local validations:
    - `npm run lint`
    - `npm run typecheck`
    - `npm run build`
-3. Generar artefacto reproducible:
+3. Generate a reproducible artifact:
    - `npm run pack`
